@@ -4,15 +4,21 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
+import { v4 as uuid } from "uuid";
+import { Game } from "../../games/entities/Game";
 
-import { Game } from '../../games/entities/Game';
-
-@Entity('users')
+@Entity("users")
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
+
+  @PrimaryColumn("uuid")
   id: string;
 
   @Column()
