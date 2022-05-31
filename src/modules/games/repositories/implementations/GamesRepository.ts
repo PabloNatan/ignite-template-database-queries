@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
 
 import { User } from "../../../users/entities/User";
+import { CreateGameDTO } from "../../dtos/create-game.dto";
 import { Game } from "../../entities/Game";
 
 import { IGamesRepository } from "../IGamesRepository";
@@ -10,6 +11,16 @@ export class GamesRepository implements IGamesRepository {
 
   constructor() {
     this.repository = getRepository(Game);
+  }
+
+  async findByTitle(title: string): Promise<Game | undefined> {
+    const game = await this.repository.findOne({ where: { title } });
+    return game;
+  }
+
+  async create(params: CreateGameDTO): Promise<void> {
+    const game = this.repository.create(params);
+    await this.repository.save(game);
   }
 
   async findByTitleContaining(param: string): Promise<Game[]> {
