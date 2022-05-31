@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
-import { AppError } from "../../../errors/AppError";
-import { CreateGameDTO } from "../dtos/create-game.dto";
-import { IGamesRepository } from "../repositories/IGamesRepository";
+import { AppError } from "../../../../errors/AppError";
+import { CreateGameDTO } from "../../dtos/create-game.dto";
+import { IGamesRepository } from "../../repositories/IGamesRepository";
 
 @injectable()
 class CreateGameUseCase {
