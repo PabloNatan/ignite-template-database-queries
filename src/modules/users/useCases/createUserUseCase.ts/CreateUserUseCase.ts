@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppError";
 import { CreateUserDTO } from "../../dtos";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 
@@ -15,7 +16,7 @@ class CreateUserUseCase {
     );
 
     if (userAlreadyExists) {
-      throw new Error("User Already Exists");
+      throw new AppError("User Already Exists", 400);
     }
 
     await this.userRepository.create(params);
