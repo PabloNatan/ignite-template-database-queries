@@ -7,5 +7,5 @@ export interface IGamesRepository {
   countAllGames(): Promise<[{ count: string }]>;
   findUsersByGameId(id: string): Promise<User[]>;
   create(params: CreateGameDTO): Promise<void>;
-  findByTitle(name: string): Promise<Game | undefined>;
+  findByTitle(title: string): Promise<Game>;
 }

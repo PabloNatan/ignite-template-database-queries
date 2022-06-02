@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { IsArray, IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 interface IFindUserWithGamesDTO {
   user_id: string;
@@ -23,4 +23,17 @@ class CreateUserDTO {
   email: string;
 }
 
-export { IFindUserWithGamesDTO, IFindUserByFullNameDTO, CreateUserDTO };
+class AddGamesToUserDTO {
+  @IsString()
+  userId: string;
+
+  @IsArray()
+  games: string[];
+}
+
+export {
+  IFindUserWithGamesDTO,
+  IFindUserByFullNameDTO,
+  CreateUserDTO,
+  AddGamesToUserDTO,
+};

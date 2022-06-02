@@ -4,7 +4,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
@@ -18,7 +18,7 @@ export class User {
     }
   }
 
-  @PrimaryColumn("uuid")
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column()

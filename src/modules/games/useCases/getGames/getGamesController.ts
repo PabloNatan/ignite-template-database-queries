@@ -8,7 +8,7 @@ class GetGamesController {
     const getGamesUseCase = container.resolve(GetGamesUseCase);
     const games = await getGamesUseCase.execute(String(title));
 
-    return response.json(games);
+    return response.status(200).json(games);
   }
 }
 export { GetGamesController };

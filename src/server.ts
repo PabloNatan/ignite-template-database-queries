@@ -6,6 +6,7 @@ import { router } from "./routes";
 import "./database/data-source";
 import "./shared/container";
 import { AppError } from "./errors/AppError";
+import { QueryFailedError } from "typeorm";
 
 const app = express();
 
@@ -18,6 +19,21 @@ app.use(
     if (err instanceof AppError) {
       return response.status(err.statusCode).json({
         message: err.message,
+      });
+    }
+
+    if (err instanceof QueryFailedError) {
+      console.log(err);
+      let message = err.message;
+
+      const matches = err?.query?.match(/SELECT "(\w+)"/);
+
+      if (matches) {
+        const entity = matches[1];
+        message = `${entity} not found`;
+      }
+      return response.status(400).json({
+        message: message,
       });
     }
 
